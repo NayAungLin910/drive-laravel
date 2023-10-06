@@ -18,7 +18,9 @@ import NavLink from '@/Components/NavLink.vue';
             <CreateNewDropdown />
 
             <div class="py-3">
-                <NavLink :href="route('myFiles')">
+
+                <!-- active for routes that start with /my-files -->
+                <NavLink :href="route('myFiles')" :active="/^\/my-files/.test($page.url)">
                     My Files
                 </NavLink>
                 <NavLink href="/">
