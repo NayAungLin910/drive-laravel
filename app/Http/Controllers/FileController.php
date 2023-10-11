@@ -26,9 +26,15 @@ class FileController extends Controller
         $data = $request->validated();
         $parent = $request->parent;
 
-        if(!$parent) {
+        if (!$parent) {
             $parent = $this->getRoot();
         }
+
+        $file = new File();
+        $file->is_folder = 1;
+        $file->name = $data['name'];
+
+        $parent->appendNode($file);
     }
 
     /**
