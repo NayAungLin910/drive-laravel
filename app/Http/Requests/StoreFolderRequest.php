@@ -12,7 +12,7 @@ class StoreFolderRequest extends ParentIdBaseRequest
 
     /**
      * The authorization of this request is handled in the
-     * extended ParentIdBaseRequest 
+     * extended ParentIdBaseRequest class
      */
 
     /**
@@ -27,7 +27,7 @@ class StoreFolderRequest extends ParentIdBaseRequest
                 'required',
                 Rule::unique(File::class, 'name')
                     ->where('created_by', Auth::id()) // unique only for current user
-                    ->where('parent_id', $this->parent->id) // only under the current parent directory
+                    ->where('parent_id', $this->parent_id) // only under the current parent directory
                     ->whereNull('deleted_at') // only not deleted
             ]
         ]);

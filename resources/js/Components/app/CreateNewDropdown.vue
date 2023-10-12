@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import CreateFolderModal from '@/Components/app/CreateFolderModal.vue';
 import { ref } from 'vue';
 
-let createFolderModal = ref(false);
+const createFolderModal = ref(false);
 
 function showCreateFolderModal() {
     createFolderModal.value = true;

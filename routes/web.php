@@ -32,7 +32,7 @@ Route::get('/', function () {
 // Files
 Route::controller(FileController::class)->middleware(['auth', 'verified'])->group(function () {
     Route::get('/my-files', 'myFiles')->name('myFiles'); // user's files
-    Route::get('/folder.create', 'createFolder')->name('folder.create'); // create folder page
+    Route::post('/folder.create', 'createFolder')->name('folder.create'); // create folder page
 });
 
 // Dashboard routes
