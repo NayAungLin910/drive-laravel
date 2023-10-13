@@ -9,35 +9,26 @@ use Illuminate\Validation\Rule;
 
 class StoreFolderRequest extends ParentIdBaseRequest
 {
-
-    /**
-     * The authorization of this request is handled in the
-     * extended ParentIdBaseRequest class
-     */
-
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
-        return array_merge(parent::rules(), [
-            'name' => [
-                'required',
-                Rule::unique(File::class, 'name')
-                    ->where('created_by', Auth::id()) // unique only for current user
-                    ->where('parent_id', $this->parent_id) // only under the current parent directory
-                    ->whereNull('deleted_at') // only not deleted
+        return array_merge(parent::rules(),
+            [
+                'name' => [
+                    'required',
+                    Rule::unique(File::class, 'name')
+                        ->where('created_by', Auth::id())
+                        ->where('parent_id', $this->parent_id)
+                        ->whereNull('deleted_at')
+                ]
             ]
-        ]);
+        );
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array<string, string>
-     */
     public function messages()
     {
         return [

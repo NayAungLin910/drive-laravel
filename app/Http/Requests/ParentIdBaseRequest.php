@@ -17,30 +17,28 @@ class ParentIdBaseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // find the parent file of the currently being created file
         $this->parent = File::query()->where('id', $this->input('parent_id'))->first();
 
-        // if parent file exists and if the current user is not the owner, returns false
         if ($this->parent && !$this->parent->isOwnedBy(Auth::id())) {
             return false;
         }
-
         return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
             'parent_id' => [
-                Rule::exists(File::class, 'id') // if there is parent_id it must exists in the files table inside the id column
+                Rule::exists(File::class, 'id')
                     ->where(function (Builder $query) {
-                        return $query->where('is_folder', '=', '1') // must be folder
-                            ->where('created_by', '=', Auth::id()); // the current user must be the owner of the folder
+                        return $query
+                            ->where('is_folder', '=', '1')
+                            ->where('created_by', '=', Auth::id());
                     })
             ]
         ];
