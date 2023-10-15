@@ -17,7 +17,6 @@ function showCreateFolderModal() {
             text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
             Create New
         </MenuButton>
-
         <transition enter-active-class="transition duration-100 ease-out" enter-from-class="transform scale-95 opacity-0"
             enter-to-class="transform scale-100 opacity-100" leave-active-class="transition duration-75 ease-in"
             leave-from-class="transform scale-100 opacity-100" leave-to-class="transform scale-95 opacity-0">

@@ -31,7 +31,9 @@ Route::get('/', function () {
 
 // Files
 Route::controller(FileController::class)->middleware(['auth', 'verified'])->group(function () {
-    Route::get('/my-files', 'myFiles')->name('myFiles'); // user's files
+    Route::get('/my-files/{folder?}', 'myFiles')
+        ->where('folder', '(.*)') // the folder can be anything according to the regular expression
+        ->name('myFiles'); // user's files
     Route::post('/folder.create', 'createFolder')->name('folder.create'); // create folder page
 });
 

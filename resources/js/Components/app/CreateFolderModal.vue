@@ -18,11 +18,16 @@ const emit = defineEmits([
 
 const form = useForm({
     name: '',
+    parent_id: null,
 })
+
+const page = usePage();
 
 const folderNameInput = ref(null)
 
 function createFolder() {
+
+    form.parent_id = page.props.folder.id
 
     form.post(route('folder.create'), {
         preserveScroll: true,
