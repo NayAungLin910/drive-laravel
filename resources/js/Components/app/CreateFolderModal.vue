@@ -27,7 +27,8 @@ const folderNameInput = ref(null)
 
 function createFolder() {
 
-    form.parent_id = page.props.folder.id
+    // get the folder resource shared from myFiles method from FileController
+    form.parent_id = page.props.folder.data.id 
 
     form.post(route('folder.create'), {
         preserveScroll: true,

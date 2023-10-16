@@ -49,9 +49,6 @@ class FileController extends Controller
      */
     public function createFolder(StoreFolderRequest $request)
     {
-
-        // dd(File::where('created_by', Auth::id())->where('parent_id', 1)->whereNull('deleted_at')->get());
-
         $data = $request->validated();
         $parent = $request->parent;
 

@@ -56,12 +56,14 @@ class File extends Model
 
         // whenever a file is being create
         static::creating(function ($model) {
-            if (!$model->parent) { // if no model parent or if it is root since it does not need path
+            if (!$model->parent) { // if the file is root folder, returns since it does not require a path
                 return;
             }
 
-            $model->path = (!$model->parent->isRoot() ? // if the file is not root folder, and if the parent of the file being created is not root,
-                $model->parent->path . '/' : // then prefix the folder with the parent folder path
+            // if the parent of the file being created is not root,
+            $model->path = (!$model->parent->isRoot() ?
+                // then prefix the folder with the parent folder's path
+                $model->parent->path . '/' :
                 ''
             ) . Str::slug($model->name);
         });

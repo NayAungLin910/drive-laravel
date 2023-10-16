@@ -1,6 +1,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-import { router, Link } from '@inertiajs/vue3';
+import { router, Link } from '@inertiajs/vue3'
+import { HomeIcon } from '@heroicons/vue/20/solid'
+import { ChevronRightIcon } from '@heroicons/vue/20/solid';
 
 const props = defineProps({
     files: Object,
@@ -25,17 +27,25 @@ function openFolder(file) {
                 <li v-for="ans in ancestors.data" :key="ans.id" class="inline-flex items-center">
 
                     <!-- Root -->
-                    <Link v-if="!ans.parent_id" :href="route('myFiles')" class="inline-flex items-center text-sm
-                    font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                    <i class="fa-solid fa-house pr-1 pb-1"></i>   
-                    MyFiles
+                    <Link v-if="!ans.parent_id" :href="route('myFiles')" class="flex items-center text-sm
+                    font-medium text-gray-700 hover:text-blue-600 dark:text-gray-500 dark:hover:text-gray-400">
+
+                    <!-- Heroicons home icon -->
+                    <HomeIcon class="h-6 w-6 mb-1 mr-1" />
+                    <span>
+                        MyFiles
+                    </span>
+
                     </Link>
 
                     <div v-else class="flex items-center">
-                        <i class="fa-solid fa-chevron-right"></i>
+
                         <Link :href="route('myFiles', { folder: ans.path })"
-                            class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-                        {{ ans.path }}
+                            class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-500 dark:hover:text-gray-400">
+
+                        <ChevronRightIcon class="h-6 w-6 inline-block" />
+                        {{ ans.name }}
+
                         </Link>
                     </div>
                 </li>
